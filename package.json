@@ -1,7 +1,8 @@
 {
-  "name": "fastify-snippets",
-  "displayName": "Fastify Snippets",
+  "name": "fastify-snippet",
+  "displayName": "Fastify Snippet",
   "description": "Extension for fastify framework snippets.",
+  "publisher": "sumit-fastify-snippets",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.105.0"
@@ -18,5 +19,11 @@
     ]
   },
   "icon": "logo.png",
-  "author": "Sumit Yewale <s.t.yewale@gmail.com>"
+  "author": {
+    "name": "Sumit Yewale <s.t.yewale@gmail.com>"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sumitYewale/fastify-snippets.git"
+  }
 }

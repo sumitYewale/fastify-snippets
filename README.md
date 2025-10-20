@@ -1,8 +1,8 @@
 # Fastify Snippets for VS Code
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/yourpublisherid.fastify-snippets?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=yourpublisherid.fastify-snippets)
-[![Installs](https://img.shields.io/visual-studio-marketplace/i/yourpublisherid.fastify-snippets?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=yourpublisherid.fastify-snippets)
-[![Rating](https://img.shields.io/visual-studio-marketplace/r/yourpublisherid.fastify-snippets?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=yourpublisherid.fastify-snippets)
+[![Version](https://img.shields.io/visual-studio-marketplace/v/yourpublisherid.fastify-snippets?style=flat-square)]( https://marketplace.visualstudio.com/items?itemName=sumit-fastify-snippets.fastify-snippet)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/yourpublisherid.fastify-snippets?style=flat-square)]( https://marketplace.visualstudio.com/items?itemName=sumit-fastify-snippets.fastify-snippet)
+[![Rating](https://img.shields.io/visual-studio-marketplace/r/yourpublisherid.fastify-snippets?style=flat-square)]( https://marketplace.visualstudio.com/items?itemName=sumit-fastify-snippets.fastify-snippet)
 
 A collection of essential code snippets to supercharge your Fastify development in Visual Studio Code. Write less, code more!
 
@@ -70,14 +70,8 @@ Found a bug or have a suggestion for a new snippet? We welcome contributions!
 
 ---
 
-## 📄 License
-
-This extension is licensed under the [MIT License](LICENSE).
-
----
-
 ## ❤️ Support
 
-If you find this extension helpful, please consider leaving a rating and review in the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=yourpublisherid.fastify-snippets)!
+If you find this extension helpful, please consider leaving a rating and review in the [VS Code Marketplace]( https://marketplace.visualstudio.com/items?itemName=sumit-fastify-snippets.fastify-snippet)!
 
 ---
