@@ -14,7 +14,7 @@
     "snippets": [
       {
         "language": "javascript",
-        "path": "./snippets/fastify.json"
+        "path": "./snippets/snippets.code-snippets"
       }
     ]
   },
