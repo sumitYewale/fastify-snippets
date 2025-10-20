@@ -1,0 +1,375 @@
+{
+  // --- Core Fastify Server ---
+  "Fastify Server Instance": {
+    "prefix": "fserver",
+    "body": [
+      "const fastify = require('fastify')({ logger: true })",
+      "",
+      "fastify.get('/', async (request, reply) => {",
+      "  return { hello: 'world' }",
+      "})",
+      "",
+      "const start = async () => {",
+      "  try {",
+      "    await fastify.listen({ port: ${1:3000} })",
+      "    fastify.log.info(`Server listening on ${fastify.server.address().port}`)",
+      "  } catch (err) {",
+      "    fastify.log.error(err)",
+      "    process.exit(1)",
+      "  }",
+      "}",
+      "start()"
+    ],
+    "description": "Basic Fastify server instance with a root route and logger."
+  },
+  "Fastify Server with Await/Async": {
+    "prefix": "fserverasync",
+    "body": [
+      "const fastify = require('fastify')({ logger: true })",
+      "",
+      "fastify.get('/', async (request, reply) => {",
+      "  return { message: 'Hello from async world!' }",
+      "})",
+      "",
+      "async function start() {",
+      "  try {",
+      "    await fastify.listen({ port: ${1:3000} })",
+      "    fastify.log.info(`Server listening on ${fastify.server.address().port}`)",
+      "  } catch (err) {",
+      "    fastify.log.error(err)",
+      "    process.exit(1)",
+      "  }",
+      "}",
+      "",
+      "start()"
+    ],
+    "description": "Fastify server boilerplate using async/await for startup."
+  },
+  "Fastify Server TypeScript": {
+    "prefix": "fserverts",
+    "body": [
+      "import Fastify, { FastifyInstance, FastifyServerOptions } from 'fastify'",
+      "",
+      "const serverOptions: FastifyServerOptions = {",
+      "  logger: true",
+      "}",
+      "",
+      "const fastify: FastifyInstance = Fastify(serverOptions)",
+      "",
+      "fastify.get('/', async (request, reply) => {",
+      "  return { hello: 'TypeScript World!' }",
+      "})",
+      "",
+      "const start = async () => {",
+      "  try {",
+      "    await fastify.listen({ port: ${1:3000} })",
+      "    fastify.log.info(`Server listening on ${fastify.server.address().port}`)",
+      "  } catch (err) {",
+      "    fastify.log.error(err)",
+      "    process.exit(1)",
+      "  }",
+      "}",
+      "",
+      "start()"
+    ],
+    "description": "Basic Fastify server instance with TypeScript."
+  },
+
+  // --- Routes ---
+  "Fastify Route": {
+    "prefix": "froute",
+    "body": [
+      "fastify.${1|get,post,put,delete,patch,head,options|}('/${2:path}', async (request, reply) => {",
+      "  ${3:// Your route logic here}",
+      "  return { status: 'success' }",
+      "})"
+    ],
+    "description": "Generic Fastify route handler."
+  },
+  "Fastify GET Route": {
+    "prefix": "fget",
+    "body": [
+      "fastify.get('/${1:path}', async (request, reply) => {",
+      "  ${2:// Handle GET request}",
+      "  return { message: 'Data retrieved' }",
+      "})"
+    ],
+    "description": "Fastify GET route handler."
+  },
+  "Fastify POST Route": {
+    "prefix": "fpost",
+    "body": [
+      "fastify.post('/${1:path}', async (request, reply) => {",
+      "  const body = request.body",
+      "  ${2:// Handle POST request with body}",
+      "  return { message: 'Data created', data: body }",
+      "})"
+    ],
+    "description": "Fastify POST route handler with request body."
+  },
+  "Fastify Route with Schema (TypeScript)": {
+    "prefix": "froutetsschema",
+    "body": [
+      "import { RouteShorthandOptions } from 'fastify'",
+      "",
+      "interface MyBody {",
+      "  name: string",
+      "}",
+      "",
+      "interface MyQuerystring {",
+      "  id: string",
+      "}",
+      "",
+      "const opts: RouteShorthandOptions = {",
+      "  schema: {",
+      "    body: {",
+      "      type: 'object',",
+      "      properties: {",
+      "        name: { type: 'string' }",
+      "      },",
+      "      required: ['name']",
+      "    },",
+      "    querystring: {",
+      "      type: 'object',",
+      "      properties: {",
+      "        id: { type: 'string' }",
+      "      },",
+      "      required: ['id']",
+      "    },",
+      "    response: {",
+      "      200: {",
+      "        type: 'object',",
+      "        properties: {",
+      "          message: { type: 'string' }",
+      "        }",
+      "      }",
+      "    }",
+      "  }",
+      "}",
+      "",
+      "fastify.post<{ Body: MyBody, Querystring: MyQuerystring }>('/${1:path}', opts, async (request, reply) => {",
+      "  const { name } = request.body",
+      "  const { id } = request.query",
+      "  ${2:// Your route logic}",
+      "  return { message: `Received name: ${name} and id: ${id}` }",
+      "})"
+    ],
+    "description": "Fastify route with JSON schema validation and TypeScript interfaces."
+  },
+  "Fastify Route with PreHandler": {
+    "prefix": "frouteprehandler",
+    "body": [
+      "fastify.get('/${1:path}', {",
+      "  preHandler: async (request, reply) => {",
+      "    ${2:// Pre-handler logic, e.g., authentication}",
+      "    // if (!request.user) {",
+      "    //   throw new Error('Unauthorized')",
+      "    // }",
+      "  }",
+      "}, async (request, reply) => {",
+      "  ${3:// Route logic}",
+      "  return { data: 'accessed after pre-handler' }",
+      "})"
+    ],
+    "description": "Fastify route with a preHandler hook."
+  },
+
+  // --- Plugins ---
+  "Fastify Plugin Boilerplate": {
+    "prefix": "fplugin",
+    "body": [
+      "const fp = require('fastify-plugin')",
+      "",
+      "module.exports = fp(async function (fastify, opts) {",
+      "  ${1:// Your plugin logic here}",
+      "  // Example: Decorate Fastify instance",
+      "  // fastify.decorate('someService', {",
+      "  //   doSomething: () => 'Hello from service'",
+      "  // })",
+      "",
+      "  // Example: Add a hook",
+      "  // fastify.addHook('onRequest', (request, reply, done) => {",
+      "  //   fastify.log.info('Request received!')",
+      "  //   done()",
+      "  // })",
+      "}, {",
+      "  name: '${2:my-fastify-plugin}',",
+      "  dependencies: [${3:/* optional dependencies */}]",
+      "})"
+    ],
+    "description": "Boilerplate for a Fastify plugin using fastify-plugin."
+  },
+  "Fastify Plugin (TypeScript)": {
+    "prefix": "fplugints",
+    "body": [
+      "import { FastifyInstance, FastifyPluginAsync } from 'fastify'",
+      "import fp from 'fastify-plugin'",
+      "",
+      "declare module 'fastify' {",
+      "  interface FastifyInstance {",
+      "    ${1:myDecorator}: () => string",
+      "  }",
+      "}",
+      "",
+      "const myPlugin: FastifyPluginAsync = async (fastify: FastifyInstance, opts: any) => {",
+      "  fastify.decorate('${1:myDecorator}', () => {",
+      "    return 'Hello from plugin decorator!'",
+      "  })",
+      "}",
+      "",
+      "export default fp(myPlugin, {",
+      "  name: '${2:my-fastify-ts-plugin}'",
+      "})"
+    ],
+    "description": "Fastify plugin boilerplate with TypeScript and a decorated property."
+  },
+  "Register Plugin": {
+    "prefix": "fregister",
+    "body": [
+      "fastify.register(require('./${1:plugins/my-plugin}'), {",
+      "  ${2:// options for the plugin}",
+      "  // optionA: 'valueA'",
+      "})"
+    ],
+    "description": "Register a Fastify plugin."
+  },
+
+  // --- Hooks ---
+  "Fastify onRequest Hook": {
+    "prefix": "fhookonrequest",
+    "body": [
+      "fastify.addHook('onRequest', async (request, reply) => {",
+      "  ${1:// Logic before route handling}",
+      "  fastify.log.info(`Incoming request for ${request.method} ${request.url}`)",
+      "})"
+    ],
+    "description": "Add an 'onRequest' hook."
+  },
+  "Fastify preHandler Hook": {
+    "prefix": "fhookprehandler",
+    "body": [
+      "fastify.addHook('preHandler', async (request, reply) => {",
+      "  ${1:// Logic before handler, after parsing body}",
+      "  // if (!request.user) {",
+      "  //   reply.code(401).send({ message: 'Unauthorized' })",
+      "  // }",
+      "})"
+    ],
+    "description": "Add a 'preHandler' hook."
+  },
+  "Fastify onSend Hook": {
+    "prefix": "fhookonsend",
+    "body": [
+      "fastify.addHook('onSend', async (request, reply, payload) => {",
+      "  ${1:// Logic before sending payload to client}",
+      "  // e.g., modify payload, add headers",
+      "  return payload",
+      "})"
+    ],
+    "description": "Add an 'onSend' hook."
+  },
+
+  // --- Decorators ---
+  "Fastify Decorate": {
+    "prefix": "fdecorate",
+    "body": [
+      "fastify.decorate('${1:myUtility}', function () {",
+      "  ${2:// Your utility function logic}",
+      "  return 'Decorated value'",
+      "})"
+    ],
+    "description": "Decorate the Fastify instance with a new property or method."
+  },
+  "Fastify Decorate Request": {
+    "prefix": "fdecoraterequest",
+    "body": [
+      "fastify.decorateRequest('${1:user}', null)",
+      "",
+      "fastify.addHook('onRequest', async (request, reply) => {",
+      "  // Assign a value to the decorated property",
+      "  request.${1:user} = { id: 1, name: 'John Doe' }",
+      "})"
+    ],
+    "description": "Decorate the Request object."
+  },
+  "Fastify Decorate Reply": {
+    "prefix": "fdecoratereply",
+    "body": [
+      "fastify.decorateReply('${1:success}', function (data) {",
+      "  this.code(200).send({ status: 'success', data })",
+      "})",
+      "",
+      "fastify.get('/test', (request, reply) => {",
+      "  reply.${1:success}({ message: 'Operation successful' })",
+      "})"
+    ],
+    "description": "Decorate the Reply object with a utility method."
+  },
+
+  // --- Error Handling ---
+  "Fastify Error Handler": {
+    "prefix": "ferrorhandler",
+    "body": [
+      "fastify.setErrorHandler(async (error, request, reply) => {",
+      "  if (error.validation) {",
+      "    reply.status(400).send({",
+      "      statusCode: 400,",
+      "      code: 'FST_VALIDATION_FAILED',",
+      "      message: 'Validation failed',",
+      "      errors: error.validation",
+      "    })",
+      "  } else {",
+      "    fastify.log.error(error)",
+      "    reply.status(${1:500}).send({",
+      "      statusCode: ${1:500},",
+      "      code: 'FST_INTERNAL_ERROR',",
+      "      message: 'Internal Server Error'",
+      "    })",
+      "  }",
+      "})"
+    ],
+    "description": "Custom Fastify error handler."
+  },
+
+  // --- Request/Reply Utilities ---
+  "Fastify Reply Send": {
+    "prefix": "freplysend",
+    "body": ["reply.send({ ${1:key}: '${2:value}' })"],
+    "description": "Reply with JSON data."
+  },
+  "Fastify Reply Status": {
+    "prefix": "freplystatus",
+    "body": ["reply.status(${1:200}).send({ ${2:message}: '${3:OK}' })"],
+    "description": "Reply with a specific HTTP status code."
+  },
+  "Fastify Reply Redirect": {
+    "prefix": "freplyredirect",
+    "body": ["reply.redirect(${1:302}, '${2:/new-location}')"],
+    "description": "Redirect the client to another URL."
+  },
+
+  // --- Schema Definition ---
+  "JSON Schema Object": {
+    "prefix": "fjsonschemaobject",
+    "body": [
+      "{",
+      "  type: 'object',",
+      "  properties: {",
+      "    ${1:propertyName}: { type: '${2:string}' }",
+      "  },",
+      "  required: ['${1:propertyName}']",
+      "}"
+    ],
+    "description": "Basic JSON Schema object structure."
+  },
+  "JSON Schema String": {
+    "prefix": "fjsonschemastring",
+    "body": ["{ type: 'string'${1:, minLength: ${2:1}, maxLength: ${3:255}}}"],
+    "description": "JSON Schema type 'string'."
+  },
+  "JSON Schema Number": {
+    "prefix": "fjsonschemanumber",
+    "body": ["{ type: 'number'${1:, minimum: ${2:0}, maximum: ${3:100}}}"],
+    "description": "JSON Schema type 'number'."
+  }
+}

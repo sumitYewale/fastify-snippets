@@ -1,0 +1,22 @@
+{
+  "name": "fastify-snippets",
+  "displayName": "Fastify Snippets",
+  "description": "Extension for fastify framework snippets.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.105.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/fastify.json"
+      }
+    ]
+  },
+  "icon": "logo.png",
+  "author": "Sumit Yewale <s.t.yewale@gmail.com>"
+}
